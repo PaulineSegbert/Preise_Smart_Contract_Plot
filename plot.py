@@ -22,6 +22,13 @@ df['AverageGas-EVM'] = pd.to_numeric(df['AverageGas-EVM'], errors='coerce')
 # Entfernen Sie Zeilen mit NaN-Werten, die nach der Konvertierung entstehen könnten
 df = df.dropna(subset=['AverageGas-EVM'])
 
+# Hinzufügen eines kleinen Werts (epsilon) zu den Durchschnittspreisdaten, um null zu vermeiden
+epsilon = 1e-10
+df['AveragePrice-Ethereum'] += epsilon
+df['AveragePrice-Polygon'] += epsilon
+df['AveragePrice-Binance'] += epsilon
+df['AveragePrice-Avalanche'] += epsilon
+
 # Plot erstellen
 fig, ax1 = plt.subplots()
 
@@ -35,6 +42,9 @@ ax1.plot(df['DataSetSize'], df['AveragePrice-Binance'], label='Binance', color=c
 ax1.plot(df['DataSetSize'], df['AveragePrice-Avalanche'], label='Avalanche', color=colors["Avalanche"], linewidth=2)
 ax1.tick_params(axis='y')
 ax1.grid(True, which="both", linestyle='--', linewidth=0.5)
+
+# Setzen der unteren Grenze der linken y-Achse auf den kleinen Wert epsilon
+ax1.set_ylim(bottom=epsilon)
 
 # Zweite y-Achse teilen
 ax2 = ax1.twinx()
@@ -68,3 +78,4 @@ fig.suptitle('Gasverbrauch und Durchschnittspreis pro ausgeführte Smart Contrac
 
 fig.tight_layout()  # sorgt dafür, dass die Achsenbeschriftungen nicht überlappen
 plt.show()
+
