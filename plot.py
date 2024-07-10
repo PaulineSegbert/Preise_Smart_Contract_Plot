@@ -32,9 +32,14 @@ df['AveragePrice-Avalanche'] += epsilon
 # Plot erstellen
 fig, ax1 = plt.subplots()
 
+# x-Achse schriftgröße der ticks anpassen
+plt.xticks(fontsize=12)
+# y-Achse schriftgröße der ticks anpassen
+plt.yticks(fontsize=12)
+
 # Erste y-Achse (logarithmisch)
-ax1.set_xlabel('Anzahl der Zeilen')
-ax1.set_ylabel('Durchschnittspreis pro Transaktion in €')
+ax1.set_xlabel('Anzahl der Zeilen', fontsize=18)
+ax1.set_ylabel('Durchschnittspreis pro Transaktion in €', fontsize=18)
 ax1.set_yscale('log')
 ax1.plot(df['DataSetSize'], df['AveragePrice-Ethereum'], label='Ethereum', color=colors["Ethereum"], linewidth=2)
 ax1.plot(df['DataSetSize'], df['AveragePrice-Polygon'], label='Polygon', color=colors["Polygon"], linewidth=2)
@@ -48,7 +53,7 @@ ax1.set_ylim(bottom=epsilon)
 
 # Zweite y-Achse teilen
 ax2 = ax1.twinx()
-ax2.set_ylabel('Durchschnittlicher Gasverbrauch (EVM)')
+ax2.set_ylabel('Durchschnittlicher Gasverbrauch (EVM)', fontsize=18)
 ax2.plot(df['DataSetSize'], df['AverageGas-EVM'], label='Gasverbrauch', color=colors["Gas"], linewidth=2)
 ax2.tick_params(axis='y')
 
@@ -64,7 +69,7 @@ ax2.set_yticks(ticks)
 
 # Beschriftungen für die Ticks generieren und setzen
 tick_labels = [f'{int(tick)}' for tick in ticks]
-ax2.set_yticklabels(tick_labels)
+ax2.set_yticklabels(tick_labels, fontsize=12)
 
 ax2.set_ylim(bottom=0)  # Stelle sicher, dass die rechte y-Achse bei Null beginnt
 ax2.grid(False)  # Deaktiviere das Grid für die zweite y-Achse, um Überlappungen zu vermeiden
@@ -73,8 +78,8 @@ ax2.grid(False)  # Deaktiviere das Grid für die zweite y-Achse, um Überlappung
 # Kombinierte Legende für beide Achsen
 lines1, labels1 = ax1.get_legend_handles_labels()
 lines2, labels2 = ax2.get_legend_handles_labels()
-ax1.legend(lines1 + lines2, labels1 + labels2, loc='upper left')
-fig.suptitle('Gasverbrauch und Durchschnittspreis pro ausgeführte Smart Contract Methode')
+ax1.legend(lines1 + lines2, labels1 + labels2, loc='best')
+fig.suptitle('Gasverbrauch und Durchschnittspreis pro ausgeführte Smart Contract Methode', fontsize=22)
 
 fig.tight_layout()  # sorgt dafür, dass die Achsenbeschriftungen nicht überlappen
 plt.show()
