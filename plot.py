@@ -35,12 +35,12 @@ df.loc[df['AveragePrice-Avalanche'] == 0, 'AveragePrice-Avalanche'] += epsilon
 fig, ax1 = plt.subplots()
 
 # Schriftgrößen der Achsen-ticks
-plt.xticks(fontsize=14)
-plt.yticks(fontsize=14)
+plt.xticks(fontsize=18)
+plt.yticks(fontsize=18)
 
 # Erste y-Achse (logarithmisch)
-ax1.set_xlabel('Anzahl der Zeilen', fontsize=20, labelpad=17)
-ax1.set_ylabel('Durchschnittspreis pro Transaktion in €', fontsize=20, labelpad=17)
+ax1.set_xlabel('Anzahl der Zeilen', fontsize=24, labelpad=17)
+ax1.set_ylabel('Durchschnittspreis pro Transaktion in €', fontsize=24, labelpad=17)
 ax1.set_yscale('log')
 ax1.plot(df['DataSetSize'], df['AveragePrice-Ethereum'], label='Ethereum', color=colors["Ethereum"], linewidth=2)
 ax1.plot(df['DataSetSize'], df['AveragePrice-Polygon'], label='Polygon', color=colors["Polygon"], linewidth=2)
@@ -53,7 +53,7 @@ ax1.set_ylim(bottom=epsilon)
 
 # Zweite y-Achse teilen
 ax2 = ax1.twinx()
-ax2.set_ylabel('Durchschnittlicher Gasverbrauch (EVM) in Mio. Einheiten', fontsize=20, labelpad=17)
+ax2.set_ylabel('Durchschnittlicher Gasverbrauch (EVM) in Mio. Einheiten', fontsize=24, labelpad=17)
 
 # Teilen der Werte durch 10^6, um in Millionen Einheiten darzustellen
 df['AverageGas-EVM-Millions'] = df['AverageGas-EVM'] / 1e6
@@ -72,7 +72,7 @@ ax2.set_yticks(ticks)
 
 # Beschriftungen für die Ticks generieren und setzen
 tick_labels = [f'{tick:.1f}' for tick in ticks]
-ax2.set_yticklabels(tick_labels, fontsize=14)
+ax2.set_yticklabels(tick_labels, fontsize=18)
 
 ax2.set_ylim(bottom=0)  # Stelle sicher, dass die rechte y-Achse bei Null beginnt
 ax2.grid(False)  # Deaktiviere das Grid für die zweite y-Achse, um Überlappungen zu vermeiden
@@ -88,7 +88,9 @@ ax1.set_xticks(np.arange(0, 4501, 500))
 # Kombinierte Legende für beide Achsen
 lines1, labels1 = ax1.get_legend_handles_labels()
 lines2, labels2 = ax2.get_legend_handles_labels()
-ax1.legend(lines1 + lines2, labels1 + labels2, loc='best', fontsize=14, markerscale=1.2)
+ax1.legend(lines1 + lines2, labels1 + labels2, loc='best', fontsize=22, markerscale=1.2)
+
+
 
 fig.tight_layout()  # sorgt dafür, dass die Achsenbeschriftungen nicht überlappen
 plt.show()
