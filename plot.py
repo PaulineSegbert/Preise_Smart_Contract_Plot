@@ -37,8 +37,8 @@ plt.xticks(fontsize=14)
 plt.yticks(fontsize=14)
 
 # Erste y-Achse (logarithmisch)
-ax1.set_xlabel('Anzahl der Zeilen', fontsize=18, labelpad=16)
-ax1.set_ylabel('Durchschnittspreis pro Transaktion in €', fontsize=18, labelpad=16)
+ax1.set_xlabel('Anzahl der Zeilen', fontsize=20, labelpad=17)
+ax1.set_ylabel('Durchschnittspreis pro Transaktion in €', fontsize=20, labelpad=17)
 ax1.set_yscale('log')
 ax1.plot(df['DataSetSize'], df['AveragePrice-Ethereum'], label='Ethereum', color=colors["Ethereum"], linewidth=2)
 ax1.plot(df['DataSetSize'], df['AveragePrice-Polygon'], label='Polygon', color=colors["Polygon"], linewidth=2)
@@ -51,7 +51,7 @@ ax1.set_ylim(bottom=epsilon)
 
 # Zweite y-Achse teilen
 ax2 = ax1.twinx()
-ax2.set_ylabel('Durchschnittlicher Gasverbrauch (EVM) in Mio. Einheiten', fontsize=18, labelpad=15)
+ax2.set_ylabel('Durchschnittlicher Gasverbrauch (EVM) in Mio. Einheiten', fontsize=20, labelpad=17)
 
 # Teilen der Werte durch 10^6, um in Millionen Einheiten darzustellen
 df['AverageGas-EVM-Millions'] = df['AverageGas-EVM'] / 1e6
