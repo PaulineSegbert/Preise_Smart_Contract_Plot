@@ -16,18 +16,20 @@ colors = {
     "Gas": "orange" 
 }
 
-# Konvertiere 'AverageGas-EVM' zu numerischen Werten
-df['AverageGas-EVM'] = pd.to_numeric(df['AverageGas-EVM'], errors='coerce')
+# Manuelle Einstellung des fehlerhaften Werts auf NaN, damit interpolate ihn erkennt
+df.at[2, 'AverageGas-EVM'] = np.nan
 
-# Entfernen Sie Zeilen mit NaN-Werten, die nach der Konvertierung entstehen könnten
-df = df.dropna(subset=['AverageGas-EVM'])
+# Interpolieren des Gasverbrauchs über die ersten 500 Zeilen
+df['AverageGas-EVM'] = df['AverageGas-EVM'].interpolate()
+
 
 # Hinzufügen eines kleinen Werts (epsilon) zu den Durchschnittspreisdaten, um null zu vermeiden
 epsilon = 1e-10
-df['AveragePrice-Ethereum'] += epsilon
-df['AveragePrice-Polygon'] += epsilon
-df['AveragePrice-Binance'] += epsilon
-df['AveragePrice-Avalanche'] += epsilon
+df.loc[df['AveragePrice-Ethereum'] == 0, 'AveragePrice-Ethereum'] += epsilon
+df.loc[df['AveragePrice-Polygon'] == 0, 'AveragePrice-Polygon'] += epsilon
+df.loc[df['AveragePrice-Binance'] == 0, 'AveragePrice-Binance'] += epsilon
+df.loc[df['AveragePrice-Avalanche'] == 0, 'AveragePrice-Avalanche'] += epsilon
+
 
 # Plot erstellen
 fig, ax1 = plt.subplots()
@@ -90,4 +92,3 @@ ax1.legend(lines1 + lines2, labels1 + labels2, loc='best', fontsize=14, markersc
 
 fig.tight_layout()  # sorgt dafür, dass die Achsenbeschriftungen nicht überlappen
 plt.show()
-
