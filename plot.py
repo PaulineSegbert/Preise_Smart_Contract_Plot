@@ -42,7 +42,7 @@ plt.yticks(fontsize=30)
 
 # Erste y-Achse (logarithmisch)
 ax1.set_xlabel('Anzahl der Zeilen', fontsize=36, labelpad=17)
-ax1.set_ylabel('Durchschnittspreis pro Transaktion in €', fontsize=36, labelpad=17)
+ax1.set_ylabel('Durchschnittspreis pro Transaktion \n in €', fontsize=36, labelpad=17)
 ax1.set_yscale('log')
 ax1.plot(df['DataSetSize'], df['AveragePrice-Ethereum'], label='Ethereum', color=colors["Ethereum"], linewidth=3)
 ax1.plot(df['DataSetSize'], df['AveragePrice-Polygon'], label='Polygon', color=colors["Polygon"], linewidth=3)
@@ -55,7 +55,7 @@ ax1.set_ylim(bottom=epsilon)
 
 # Zweite y-Achse teilen
 ax2 = ax1.twinx()
-ax2.set_ylabel('Durchschnittlicher Gasverbrauch (EVM) in Mio. Einheiten', fontsize=36, labelpad=17)
+ax2.set_ylabel('Durchschnittlicher Gasverbrauch (EVM) \n in Mio. Einheiten', fontsize=36, labelpad=17)
 
 # Teilen der Werte durch 10^6, um in Millionen Einheiten darzustellen
 df['AverageGas-EVM-Millions'] = df['AverageGas-EVM'] / 1e6
@@ -95,4 +95,5 @@ ax1.legend(lines1 + lines2, labels1 + labels2, loc='best', fontsize=34, markersc
 
 
 fig.tight_layout()  # sorgt dafür, dass die Achsenbeschriftungen nicht überlappen
+fig.canvas.draw()   # Schriftgrößen dynamisch anpassen
 plt.show()
