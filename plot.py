@@ -48,7 +48,8 @@ ax1.plot(df['DataSetSize'], df['AveragePrice-Ethereum'], label='Ethereum', color
 ax1.plot(df['DataSetSize'], df['AveragePrice-Polygon'], label='Polygon', color=colors["Polygon"], linewidth=3)
 ax1.plot(df['DataSetSize'], df['AveragePrice-Binance'], label='Binance', color=colors["Binance"], linewidth=3)
 ax1.plot(df['DataSetSize'], df['AveragePrice-Avalanche'], label='Avalanche', color=colors["Avalanche"], linewidth=3)
-ax1.tick_params(axis='y')
+ax1.tick_params(axis='y', pad=10)
+ax1.tick_params(axis='x', pad=10)
 ax1.grid(True, which="both", linestyle='--', linewidth=0.5)
 # Setzen der unteren Grenze der linken y-Achse auf den kleinen Wert epsilon
 ax1.set_ylim(bottom=epsilon)
@@ -60,7 +61,7 @@ ax2.set_ylabel('Durchschnittlicher Gasverbrauch (EVM) \n in Mio. Einheiten', fon
 # Teilen der Werte durch 10^6, um in Millionen Einheiten darzustellen
 df['AverageGas-EVM-Millions'] = df['AverageGas-EVM'] / 1e6
 ax2.plot(df['DataSetSize'], df['AverageGas-EVM-Millions'], label='Gasverbrauch', color=colors["Gas"], linewidth=3)
-ax2.tick_params(axis='y')
+ax2.tick_params(axis='y', pad=10)
 
 # Maximalen Wert von 'AverageGas-EVM' ermitteln und auf das nächste Vielfache von 200000 aufrunden
 max_gas = df['AverageGas-EVM'].max()
